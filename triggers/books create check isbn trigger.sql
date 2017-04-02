@@ -1,15 +1,17 @@
+DELIMITER $$
+DROP TRIGGER IF EXISTS `books create check isbn trigger` $$
 CREATE TRIGGER `books create check isbn trigger` 
 BEFORE INSERT ON `books` FOR EACH ROW
      BEGIN
      DECLARE isbn VARCHAR(17);
      DECLARE isbnCheck BOOLEAN;
-    DECLARE isbnLen INT DEFAULT 0;
+     DECLARE isbnLen INT DEFAULT 0;
      SET isbn = NEW.ISBN;
-	 IF isbn.CONTAINS("-") THEN
-		SET isbn = isbn.REPLACE("-", "");
+	 IF isbn LIKE '%{-}%' THEN
+		SET isbn = REPLACE(isbn,"-", "");
 	 END IF;
 	 Set isbnLen = CHAR_LENGTH(isbn);
-    CASE isbnLen      
+     CASE isbnLen      
       WHEN 13 THEN 
       SET isbnCheck = isbn13check(isbn);
       ELSE
