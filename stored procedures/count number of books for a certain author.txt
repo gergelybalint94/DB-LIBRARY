@@ -1,0 +1,11 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `countNumberOfBooksForACertainAuthors`(in authorId int)
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT COUNT(ISBN) FROM books WHERE author_id = authorId);
+UPDATE `authors` a 
+SET 
+    a.number_of_books = numberOfBooks
+WHERE
+    a.author_id = author_id;
+	Select numberOfBooks;
+END

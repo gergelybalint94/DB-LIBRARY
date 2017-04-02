@@ -1,0 +1,8 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `countBooksInStore`(in isbn VARCHAR(13))
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT `in-stock`
+					FROM            books
+					WHERE        (books.ISBN = isbn));
+SELECT numberOfBooks;
+END
