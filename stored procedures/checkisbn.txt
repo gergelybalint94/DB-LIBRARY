@@ -1,8 +1,5 @@
-CREATE DEFINER=`root`@`localhost` FUNCTION `isbn13check`(`isbn` VARCHAR(13)) RETURNS tinyint(1)
-    NO SQL
-    DETERMINISTIC
-
-BEGIN 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `checkisbn`(isbn varchar(17))
+proc_label:BEGIN 
   DECLARE temp bigint;
   DECLARE result tinyint(1);
   DECLARE sumA int; 
@@ -12,7 +9,7 @@ BEGIN
   DECLARE checkdigit int;
   DECLARE lastdigit int; 
   DECLARE remainder int;
-  SET result = FALSE; 
+  SET @result = FALSE; 
 
   IF NOT ( isbn IS NULL OR isbn = ' ' ) THEN 
     IF isbn LIKE '%{-}%' THEN 
@@ -23,7 +20,8 @@ BEGIN
     SET temp = cast(isbn AS UNSIGNED ); 
     IF ( Char_length(isbn) != 13 
           OR temp = 0 ) THEN 
-          RETURN result; 
+          SET @result=0;
+          LEAVE proc_label;
     END IF; 
     SET sumA = 0; 
     # Comment Source: Wikipedia 
@@ -52,5 +50,5 @@ BEGIN
     SET lastdigit = cast(substr(isbn, 13, 1) AS UNSIGNED); 
     SET result = (checkdigit =lastdigit); 
   END IF; 
-  RETURN result; 
+Select @result;
 END
