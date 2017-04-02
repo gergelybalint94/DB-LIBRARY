@@ -1,4 +1,4 @@
-CREATE DEFINER = CURRENT_USER TRIGGER `library`.`books_BEFORE_INSERT` 
+CREATE TRIGGER `books create check isbn trigger` 
 BEFORE INSERT ON `books` FOR EACH ROW
      BEGIN
      DECLARE isbn VARCHAR(17);
