@@ -302,7 +302,7 @@ CREATE TABLE `reservation` (
   KEY `fk_reservation_books1_idx` (`ISBN`),
   CONSTRAINT `fk_reservation_books1` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_reservation_members1` FOREIGN KEY (`members_cpr`) REFERENCES `members` (`cpr`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,6 +314,36 @@ LOCK TABLES `reservation` WRITE;
 INSERT INTO `reservation` VALUES (1,'2017-04-02 11:19:31','1806942631','9780321910578'),(2,'2017-04-02 12:47:51','2404961589','9780843601336'),(3,'2017-03-02 15:43:34','1806942631','9780843601336'),(4,'2017-03-02 14:53:31','2509941658','9780843601336'),(5,'2017-03-31 14:49:50','2509941658','9781875402007'),(6,'2017-03-31 17:32:35','2509941658','9788801102444');
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `library`.`do not allow creation of reservation if books available`
+BEFORE INSERT ON `library`.`reservation`
+FOR EACH ROW
+BEGIN
+DECLARE numberOfBooks int;
+DECLARE mt VARCHAR(100);
+SET numberOfBooks = (SELECT `in-stock`
+					FROM            books
+					WHERE        (books.ISBN = new.isbn));
+IF numberOfBooks>0 
+THEN
+set mt = CONCAT('Cannot add or update row: There are ',numberOfBooks, ' books available');
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = mt;
+          END IF;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `statuses`
@@ -487,6 +517,29 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `countBooksInStore` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `countBooksInStore`(in isbn VARCHAR(13))
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT `in-stock`
+					FROM            books
+					WHERE        (books.ISBN = isbn));
+SELECT numberOfBooks;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `countNumberOfBooksForACertainAuthors` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -523,4 +576,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-02 18:54:33
+-- Dump completed on 2017-04-02 20:59:24
