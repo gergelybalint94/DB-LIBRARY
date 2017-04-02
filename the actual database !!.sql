@@ -38,7 +38,7 @@ CREATE TABLE `authors` (
 
 LOCK TABLES `authors` WRITE;
 /*!40000 ALTER TABLE `authors` DISABLE KEYS */;
-INSERT INTO `authors` VALUES (1,'James','Keane',1),(2,'Walter','Kleeman',1),(3,'Margaret','Rolfe',1),(4,'Oppi','Untracht',2),(5,'Howie','Green',1),(6,'Michael','Dawson',1),(7,'Marc','Wandschneider',1),(8,'Alberto','Contador',1);
+INSERT INTO `authors` VALUES (1,'James','Keane',1),(2,'Walter','Kleeman',1),(3,'Margaret','Rolfe',1),(4,'Oppi','Untracht',1),(5,'Howie','Green',1),(6,'Michael','Dawson',1),(7,'Marc','Wandschneider',1),(8,'Alberto','Contador',2);
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES ('9780273411222','Enamelling on Metal (Arts & Crafts S.)',2,0,2,'Started in an unfortunate mother\'s basement in 2004 with books that a student layabout no longer needed, AwesomeBooks now stocks over 2 million titles which are ready to be sent to your door within 24hours of ordering. Our heritage is in supplying great quality used books. We have over 1.8 million books in our distribution centre ready to be shipped to you at any time. We also sell new books and are increasing our range of titles every day.',4,9,'English',1957),('9780306800481','Italian Villas and Their Gardens',2,0,1,'Struck by the magnificence of the Italian countryside from the time of her first sojourn there, our ranking novelist and lady of letters of the early 1900s?a renowned connoisseur?joined forces with the foremost illustrator of the time to celebrate a subject that was dear to them both: the incomparable villas and gardens of Italy. Edith Wharton draws on three centuries of knowledge written in four languages and covers some eighty villas and sixty garden architects. She describes the remarkable splendor of the villas for readers who have never seen them, and leads the reader through her discoveries of why the great houses and grounds create an effect of such profound calm and resolution.Their impact is not merely a matter of ancient statues or splashing fountains?impressive as these may be. Rather, the unique harmony stems from the spirit of the architects? and the designers? art: that delicate blending of man?s work and the variations of nature to achieve a sense of flawless concord. Her success in describing the Villa D?Este, the Villa Medici, and others, is enhanced and vivified by the breathtaking, full-color paintings of Maxfield Parrish.In his introductory essay, Henry Hope Reed, president of Classical America, places Italian Villas and Their Gardens in the context of American garden design at the turn of the century. Edith Wharton?s thesis, that there is much value to be learned from the traditional Italian garden, helped to shape the American landscape of the era. In conveying the message, Maxfield Parrish proved a worthy acolyte. Thomas S. Hayes, who is president of the Edith Whatron Restoration, Inc., tells in his essay how the Italian model guided her in designing the garden of her famous country house, the Mount, at Lenox, Massachusetts.',1,1,'English',1904),('9780321910578','Good Learning Node.js: A Hands-On Guide to Building Web Applications in JavaScript',1,1,0,'Learning Node.js A Hands-On Guide to Building Web Applications in JavaScript',7,7,'English',2006),('9780385041850','Jewelry: Concepts And Technology',3,0,2,'The definitive reference for jewelry makers of all levels of ability--a complete, profusely illustrated guide to design, materials, and techniques, as well as a fascinating exploration of jewelry-making throughout history.',4,4,'English',1985),('9780761529309','Flash Web Development Fast and Easy (Fast and Easy Web Development)',2,0,2,'A guide to the creation of interactive, multimedia Web sites demonstrates Flash technologies, Web animations, and special effects.',5,5,'English',2000),('9780843601336','The Challenge of Interior Design',3,3,0,'Challanges of the interior Design',2,2,'English',1981),('9781423901129','Guide to Programming with Python (Book & CD Rom)',2,0,0,'Python Programming is unique and fun because of its approach: the reader learns to program through writing game programs. While it\'s enjoyable and engaging, the book covers plenty of fundamental computer science concepts and vocabulary. Topics include variables, memory, branching, loops, data structures, functions, file handling, exceptions, object-oriented programming, GUI programming, multimedia programming, and program planning. Even with all the power it offers to industry, Python is perfect for beginners. It has clear, simple syntax and is robust yet concise. Python Programming is the most fun way to learn the basics of programming using an easy-to-learn but powerful industry-standard programming language.',6,6,'English',2008),('9781875402007','Kimono: Straight-Line Patchwork On A Japanese Theme',1,1,0,'Independent book & art merchants since 2006. Curious & collectable books. Strange & beautiful art. Logical Unsanity currently operates a 24 hour honesty system book shed in Bardon, Brisbane alongside a high quality section and art gallery at the same address.',3,3,'English',1991),('9788801102444','Pace a questa casa. Rito della benedizione della casa',4,1,0,'Rito della benedizione della casa.',8,8,'Italian',1993);
+INSERT INTO `books` VALUES ('9780273411222','Enamelling on Metal (Arts & Crafts S.)',2,0,2,'Started in an unfortunate mother\'s basement in 2004 with books that a student layabout no longer needed, AwesomeBooks now stocks over 2 million titles which are ready to be sent to your door within 24hours of ordering. Our heritage is in supplying great quality used books. We have over 1.8 million books in our distribution centre ready to be shipped to you at any time. We also sell new books and are increasing our range of titles every day.',4,9,'English',1957),('9780306800481','Italian Villas and Their Gardens',2,0,1,'Struck by the magnificence of the Italian countryside from the time of her first sojourn there, our ranking novelist and lady of letters of the early 1900s?a renowned connoisseur?joined forces with the foremost illustrator of the time to celebrate a subject that was dear to them both: the incomparable villas and gardens of Italy. Edith Wharton draws on three centuries of knowledge written in four languages and covers some eighty villas and sixty garden architects. She describes the remarkable splendor of the villas for readers who have never seen them, and leads the reader through her discoveries of why the great houses and grounds create an effect of such profound calm and resolution.Their impact is not merely a matter of ancient statues or splashing fountains?impressive as these may be. Rather, the unique harmony stems from the spirit of the architects? and the designers? art: that delicate blending of man?s work and the variations of nature to achieve a sense of flawless concord. Her success in describing the Villa D?Este, the Villa Medici, and others, is enhanced and vivified by the breathtaking, full-color paintings of Maxfield Parrish.In his introductory essay, Henry Hope Reed, president of Classical America, places Italian Villas and Their Gardens in the context of American garden design at the turn of the century. Edith Wharton?s thesis, that there is much value to be learned from the traditional Italian garden, helped to shape the American landscape of the era. In conveying the message, Maxfield Parrish proved a worthy acolyte. Thomas S. Hayes, who is president of the Edith Whatron Restoration, Inc., tells in his essay how the Italian model guided her in designing the garden of her famous country house, the Mount, at Lenox, Massachusetts.',1,1,'English',1904),('9780321910578','Good Learning Node.js: A Hands-On Guide to Building Web Applications in JavaScript',1,1,0,'Learning Node.js A Hands-On Guide to Building Web Applications in JavaScript',7,7,'English',2006),('9780385041850','Jewelry: Concepts And Technology',3,0,2,'The definitive reference for jewelry makers of all levels of ability--a complete, profusely illustrated guide to design, materials, and techniques, as well as a fascinating exploration of jewelry-making throughout history.',4,4,'English',1985),('9780761529309','Flash Web Development Fast and Easy (Fast and Easy Web Development)',2,0,2,'A guide to the creation of interactive, multimedia Web sites demonstrates Flash technologies, Web animations, and special effects.',5,5,'English',2000),('9780843601336','The Challenge of Interior Design',3,3,0,'Challanges of the interior Design',2,2,'English',1981),('9781423901129','Guide to Programming with Python (Book & CD Rom)',2,0,0,'Python Programming is unique and fun because of its approach: the reader learns to program through writing game programs. While it\'s enjoyable and engaging, the book covers plenty of fundamental computer science concepts and vocabulary. Topics include variables, memory, branching, loops, data structures, functions, file handling, exceptions, object-oriented programming, GUI programming, multimedia programming, and program planning. Even with all the power it offers to industry, Python is perfect for beginners. It has clear, simple syntax and is robust yet concise. Python Programming is the most fun way to learn the basics of programming using an easy-to-learn but powerful industry-standard programming language.',6,6,'English',2008),('9781875402007','Kimono: Straight-Line Patchwork On A Japanese Theme',1,1,0,'Independent book & art merchants since 2006. Curious & collectable books. Strange & beautiful art. Logical Unsanity currently operates a 24 hour honesty system book shed in Bardon, Brisbane alongside a high quality section and art gallery at the same address.',3,3,'English',1991),('9788801005240','Incontriamo Gesù',1,0,1,'Il nuovo, atteso documento ufficiale dei Vescovi italiani sulla catechesi. Il testo, redatto dalla Commissione Episcopale per la Dottrina della Fede, l\'Annuncio e la Catechesi e sancito dal voto della 66ª Assemblea Generale della Conferenza Episcopale Italiana (19-22 maggio 2014), è il frutto di un cammino decennale ed è destinato a diventare il punto di riferimento per parroci, catechisti e operatori pastorali, chiamati a un rinnovamento del modo di \"fare catechesi\" oggi.',8,8,'Italian',1993),('9788801102444','Pace a questa casa. Rito della benedizione della casa',4,1,0,'Rito della benedizione della casa.',8,8,'Italian',1993);
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -166,6 +166,54 @@ BEGIN
                     SET MESSAGE_TEXT = 'Cannot add or update row: invalid ISBN';
           END IF;
      END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `library`.`update author books count when book added` AFTER INSERT ON `books` FOR EACH ROW
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT COUNT(ISBN) FROM books WHERE author_id = New.author_id);
+UPDATE `authors`
+SET 
+    number_of_books = numberOfBooks
+WHERE
+    author_id = New.author_id;
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `library`.`update author books count when book removed` AFTER DELETE ON `books` FOR EACH ROW
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT COUNT(ISBN) FROM books WHERE author_id = Old.author_id);
+UPDATE `authors`
+SET 
+    number_of_books = numberOfBooks
+WHERE
+    author_id = Old.author_id;
+END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -439,7 +487,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `testisbn13` */;
+/*!50003 DROP PROCEDURE IF EXISTS `countNumberOfBooksForACertainAuthors` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -449,13 +497,17 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `testisbn13`()
-    DETERMINISTIC
-begin
-INSERT INTO `library`.`books` 
-(`ISBN`, `title`, `copies`, `reservations`, `in-stock`, `synopsis`, `author_id`, `location_id`, `language`, `year_of_publication`) 
-VALUES ('9780273411222', 'Enamelling on Metal (Arts & Crafts S.)', '2', '0', '2', 'Started in an unfortunate mother''s basement in 2004 with books that a student layabout no longer needed, AwesomeBooks now stocks over 2 million titles which are ready to be sent to your door within 24hours of ordering. Our heritage is in supplying great quality used books. We have over 1.8 million books in our distribution centre ready to be shipped to you at any time. We also sell new books and are increasing our range of titles every day.', '4', '9', 'English', '1957');
-end ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `countNumberOfBooksForACertainAuthors`(in authorId int)
+BEGIN
+DECLARE numberOfBooks int;
+SET numberOfBooks = (SELECT COUNT(ISBN) FROM books WHERE author_id = authorId);
+UPDATE `authors` a 
+SET 
+    a.number_of_books = numberOfBooks
+WHERE
+    a.author_id = author_id;
+	Select numberOfBooks;
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -471,4 +523,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-02 16:31:28
+-- Dump completed on 2017-04-02 18:54:33
