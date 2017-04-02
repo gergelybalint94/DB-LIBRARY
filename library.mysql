@@ -1,0 +1,381 @@
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+--
+-- Host: 127.0.0.1    Database: library
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.1.21-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `library`
+--
+
+/*!40000 DROP DATABASE IF EXISTS `library`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `library` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `library`;
+
+--
+-- Table structure for table `authors`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authors` (
+  `author_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `number_of_books` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`author_id`),
+  UNIQUE KEY `author_id_UNIQUE` (`author_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `authors`
+--
+
+/*!40000 ALTER TABLE `authors` DISABLE KEYS */;
+INSERT INTO `authors` VALUES (1,'James','Keane',1),(2,'Walter','Kleeman',1),(3,'Margaret','Rolfe',1),(4,'Oppi','Untracht',2),(5,'Howie','Green',1),(6,'Michael','Dawson',1),(7,'Marc','Wandschneider',1),(8,'Alberto','Contador',1);
+/*!40000 ALTER TABLE `authors` ENABLE KEYS */;
+
+--
+-- Table structure for table `book`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `book` (
+  `unique_book_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ISBN` varchar(17) NOT NULL,
+  PRIMARY KEY (`unique_book_id`),
+  UNIQUE KEY `unique_book_id_UNIQUE` (`unique_book_id`),
+  KEY `fk_book_books1_idx` (`ISBN`),
+  CONSTRAINT `fk_book_books1` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `book`
+--
+
+/*!40000 ALTER TABLE `book` DISABLE KEYS */;
+/*!40000 ALTER TABLE `book` ENABLE KEYS */;
+
+--
+-- Table structure for table `book_location`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `book_location` (
+  `location_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `room` int(10) unsigned NOT NULL,
+  `shelf` varchar(1) NOT NULL,
+  `section` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`location_id`),
+  UNIQUE KEY `location_id_UNIQUE` (`location_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `book_location`
+--
+
+/*!40000 ALTER TABLE `book_location` DISABLE KEYS */;
+INSERT INTO `book_location` VALUES (1,12,'L',5),(2,15,'C',9),(3,3,'K',4),(4,3,'J',6),(5,10,'F',9),(6,10,'G',5),(7,10,'G',2),(8,12,'P',1),(9,3,'E',4);
+/*!40000 ALTER TABLE `book_location` ENABLE KEYS */;
+
+--
+-- Table structure for table `books`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `books` (
+  `ISBN` varchar(17) NOT NULL,
+  `title` longtext NOT NULL,
+  `copies` int(10) unsigned DEFAULT NULL,
+  `reservations` int(10) unsigned DEFAULT NULL,
+  `in-stock` int(10) unsigned DEFAULT NULL,
+  `synopsis` longtext,
+  `author_id` int(10) unsigned NOT NULL,
+  `location_id` int(10) unsigned NOT NULL,
+  `language` varchar(20) DEFAULT NULL,
+  `year_of_publication` int(4) unsigned DEFAULT NULL,
+  PRIMARY KEY (`ISBN`),
+  UNIQUE KEY `ISBN_UNIQUE` (`ISBN`),
+  KEY `fk_books_authors1_idx` (`author_id`),
+  KEY `fk_books_book_location1_idx` (`location_id`),
+  CONSTRAINT `fk_books_authors1` FOREIGN KEY (`author_id`) REFERENCES `authors` (`author_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_books_book_location1` FOREIGN KEY (`location_id`) REFERENCES `book_location` (`location_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='new book isbn check';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `books`
+--
+
+/*!40000 ALTER TABLE `books` DISABLE KEYS */;
+/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `books create check isbn trigger` 
+BEFORE INSERT ON `books` FOR EACH ROW
+     BEGIN
+     DECLARE isbn VARCHAR(17);
+     DECLARE isbnCheck BOOLEAN;
+     DECLARE isbnLen INT DEFAULT 0;
+     SET isbn = NEW.ISBN;
+	 IF isbn LIKE '%{-}%' THEN
+		SET isbn = REPLACE(isbn,"-", "");
+	 END IF;
+	 Set isbnLen = CHAR_LENGTH(isbn);
+     CASE isbnLen      
+      WHEN 13 THEN 
+      SET isbnCheck = isbn13check(isbn);
+      ELSE
+        BEGIN
+        END;
+    END CASE;      
+          IF isbnCheck = false
+          THEN
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'Cannot add or update row: invalid ISBN';
+          END IF;
+     END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `loan`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `loan` (
+  `loan_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `hand_out_date` datetime NOT NULL,
+  `due_date` datetime NOT NULL,
+  `fee` float unsigned NOT NULL,
+  `unique_book_id` int(11) NOT NULL,
+  `members_cpr` varchar(10) NOT NULL,
+  PRIMARY KEY (`loan_id`),
+  UNIQUE KEY `load_id_UNIQUE` (`loan_id`),
+  KEY `fk_loan_book1_idx` (`unique_book_id`),
+  KEY `fk_loan_members1_idx` (`members_cpr`),
+  CONSTRAINT `fk_loan_book` FOREIGN KEY (`unique_book_id`) REFERENCES `book` (`unique_book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_loan_members` FOREIGN KEY (`members_cpr`) REFERENCES `members` (`cpr`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `loan`
+--
+
+/*!40000 ALTER TABLE `loan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `loan` ENABLE KEYS */;
+
+--
+-- Table structure for table `members`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `members` (
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `photograph` varchar(150) NOT NULL,
+  `cpr` varchar(10) NOT NULL,
+  `email` varchar(80) NOT NULL,
+  `status_Id` int(10) unsigned NOT NULL DEFAULT '2',
+  PRIMARY KEY (`cpr`),
+  UNIQUE KEY `cpr_UNIQUE` (`cpr`),
+  KEY `fk_members_statuses1_idx` (`status_Id`),
+  CONSTRAINT `fk_members_statuses` FOREIGN KEY (`status_Id`) REFERENCES `statuses` (`status_Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `members`
+--
+
+/*!40000 ALTER TABLE `members` DISABLE KEYS */;
+INSERT INTO `members` VALUES ('Liviu','Macovei','qedxgsddsa.jpg','1701922471','lm@gmail.com',2),('Eidvile','Bagdonaite','asdpoiapiasddsa.jpg','1806942631','eb@gmail.com',2),('Matus','Satara','sapodiapsosd.jpg','2404961589','ms@gmail.com',2),('Norbert','Biro','aewqpidsa.jpg','2509941658','nb@gmail.com',2),('Balint','Gergely','dsadopiasddsa.jpg','2910932631','bg@gmail.com',1);
+/*!40000 ALTER TABLE `members` ENABLE KEYS */;
+
+--
+-- Table structure for table `reservation`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation` (
+  `reservation_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `res_date` datetime NOT NULL,
+  `members_cpr` varchar(10) NOT NULL,
+  `ISBN` varchar(17) NOT NULL,
+  PRIMARY KEY (`reservation_id`),
+  UNIQUE KEY `reservation_id_UNIQUE` (`reservation_id`),
+  KEY `fk_reservation_members1_idx` (`members_cpr`),
+  KEY `fk_reservation_books1_idx` (`ISBN`),
+  CONSTRAINT `fk_reservation_books1` FOREIGN KEY (`ISBN`) REFERENCES `books` (`ISBN`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_reservation_members1` FOREIGN KEY (`members_cpr`) REFERENCES `members` (`cpr`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reservation`
+--
+
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+
+--
+-- Table structure for table `statuses`
+--
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `statuses` (
+  `status_Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `comment` text,
+  PRIMARY KEY (`status_Id`),
+  UNIQUE KEY `idStatuses_UNIQUE` (`status_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `statuses`
+--
+
+/*!40000 ALTER TABLE `statuses` DISABLE KEYS */;
+INSERT INTO `statuses` VALUES (1,'verified','If the user is verified'),(2,'not Verified','If the user is not verified ');
+/*!40000 ALTER TABLE `statuses` ENABLE KEYS */;
+
+--
+-- Dumping routines for database 'library'
+--
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `isbn13check`(`isbn` VARCHAR(13)) RETURNS tinyint(1)
+    NO SQL
+    DETERMINISTIC
+BEGIN 
+  DECLARE result BOOL; 
+  DECLARE temp LONG; 
+  DECLARE sum INTEGER; 
+  DECLARE i INTEGER; 
+  DECLARE currentchar INTEGER; 
+  DECLARE multiplier INTEGER;
+  DECLARE checkdigit INTEGER;
+  DECLARE lastdigit INTEGER; 
+  DECLARE remainder INTEGER;
+  SET result = FALSE; 
+
+  IF NOT ( isbn IS NULL OR isbn = ' ' ) THEN 
+    IF isbn LIKE '%{-}%' THEN 
+      SET isbn = REPLACE(isbn,"-", ""); 
+    END IF; 
+    SET temp = 0; 
+    # If the length is not 13 or if it contains any non numeric chars, return false 
+    SET temp = cast(isbn AS UNSIGNED ); 
+    IF ( Char_length(isbn) != 13 
+          OR temp = 0 ) THEN 
+      RETURN false; 
+    END IF; 
+    SET sum = 0; 
+    # Comment Source: Wikipedia 
+    # The calculation of an ISBN-13 check digit begins with the first 
+    # 12 digits of the thirteen-digit ISBN (thus excluding the check digit itself). 
+    # Each digit, from left to right, is alternately multiplied by 1 or 3, 
+    # then those products are summed modulo 10 to give a value ranging from 0 to 9. 
+    # Subtracted from 10, that leaves a result from 1 to 10. A zero (0) replaces a 
+    # ten (10), so, in all cases, a single check digit results. 
+    SET i = 0; 
+    WHILE i < 12 do 
+      SET currentchar = cast(substr(isbn, i, 1) AS UNSIGNED); 
+      IF ( MOD(i, 2) = 1 ) THEN 
+        SET multiplier = 3; 
+      ELSE 
+        SET multiplier = 1; 
+      END IF; 
+      SET sum = sum + currentchar * multiplier; 
+      SET i = i + 1; 
+    END WHILE; 
+    SET remainder = MOD(sum, 10); 
+    SET checkdigit = 10 - remainder; 
+    IF ( checkdigit = 10 ) THEN 
+      SET checkdigit = 0; 
+    END IF; 
+    SET lastdigit = cast(substr(isbn, 12, 1) AS UNSIGNED); 
+    SET result = (checkdigit =lastdigit); 
+  END IF; 
+
+  RETURN result; 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = latin1_swedish_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `testisbn13`()
+    DETERMINISTIC
+begin
+INSERT INTO `library`.`books` 
+(`ISBN`, `title`, `copies`, `reservations`, `in-stock`, `synopsis`, `author_id`, `location_id`, `language`, `year_of_publication`) 
+VALUES ('9780273411222', 'Enamelling on Metal (Arts & Crafts S.)', '2', '0', '2', 'Started in an unfortunate mother''s basement in 2004 with books that a student layabout no longer needed, AwesomeBooks now stocks over 2 million titles which are ready to be sent to your door within 24hours of ordering. Our heritage is in supplying great quality used books. We have over 1.8 million books in our distribution centre ready to be shipped to you at any time. We also sell new books and are increasing our range of titles every day.', '4', '9', 'English', '1957');
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-02 16:25:33
