@@ -223,6 +223,25 @@ DELIMITER ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
+-- Temporary view structure for view `booksloaned`
+--
+
+DROP TABLE IF EXISTS `booksloaned`;
+/*!50001 DROP VIEW IF EXISTS `booksloaned`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `booksloaned` AS SELECT 
+ 1 AS `first_name`,
+ 1 AS `last_name`,
+ 1 AS `cpr`,
+ 1 AS `due_date`,
+ 1 AS `return_date`,
+ 1 AS `fee`,
+ 1 AS `ISBN`,
+ 1 AS `title`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `loan`
 --
 
@@ -434,6 +453,24 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `reservedbooks`
+--
+
+DROP TABLE IF EXISTS `reservedbooks`;
+/*!50001 DROP VIEW IF EXISTS `reservedbooks`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `reservedbooks` AS SELECT 
+ 1 AS `first_name`,
+ 1 AS `last_name`,
+ 1 AS `cpr`,
+ 1 AS `ISBN`,
+ 1 AS `title`,
+ 1 AS `res_date`,
+ 1 AS `Expr1`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `statuses`
@@ -684,6 +721,42 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `booksloaned`
+--
+
+/*!50001 DROP VIEW IF EXISTS `booksloaned`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `booksloaned` AS select `members`.`first_name` AS `first_name`,`members`.`last_name` AS `last_name`,`members`.`cpr` AS `cpr`,`loan`.`due_date` AS `due_date`,`loan`.`return_date` AS `return_date`,`loan`.`fee` AS `fee`,`books`.`ISBN` AS `ISBN`,`books`.`title` AS `title` from (`members` left join (`loan` left join (`book` join `books` on((`book`.`ISBN` = `books`.`ISBN`))) on((`book`.`unique_book_id` = `loan`.`unique_book_id`))) on((`loan`.`members_cpr` = `members`.`cpr`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `reservedbooks`
+--
+
+/*!50001 DROP VIEW IF EXISTS `reservedbooks`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `reservedbooks` AS select `members`.`first_name` AS `first_name`,`members`.`last_name` AS `last_name`,`members`.`cpr` AS `cpr`,`books`.`ISBN` AS `ISBN`,`books`.`title` AS `title`,`reservation`.`res_date` AS `res_date`,`reservation`.`ISBN` AS `Expr1` from ((`books` join `reservation` on((`books`.`ISBN` = `reservation`.`ISBN`))) join `members` on((`reservation`.`members_cpr` = `members`.`cpr`))) where (`reservation`.`res_date` is not null) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -694,4 +767,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-03  0:45:04
+-- Dump completed on 2017-04-03 10:13:34
